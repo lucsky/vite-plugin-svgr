@@ -11,13 +11,13 @@ This plugin only works with version 2.5.0 (and greater) of ViteJS, which has a c
 -   with npm
 
 ```shell
-$ npm i --save-dev @lucsky/vite-plugin-svgr
+$ npm i --save-dev @honkhonk/vite-plugin-svgr
 ```
 
 -   with yarn
 
 ```shell
-$ yarn add --dev @lucsky/vite-plugin-svgr
+$ yarn add --dev @honkhonk/vite-plugin-svgr
 ```
 
 ## Usage
@@ -25,7 +25,7 @@ $ yarn add --dev @lucsky/vite-plugin-svgr
 Add `svgrPlugin()` to the list of plugins in the ViteJS configuration file (`vite.config.js`) of your project.
 
 ```js
-import svgrPlugin from '@lucsky/vite-plugin-svgr';
+import svgrPlugin from '@honkhonk/vite-plugin-svgr';
 
 export default defineConfig({
     //...
