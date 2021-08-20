@@ -39,6 +39,6 @@
     "scripts": {
         "dev": "tsc --watch",
         "build": "tsc",
-        "prepublish": "build"
+        "prepublish": "yarn run build"
     }
 }
