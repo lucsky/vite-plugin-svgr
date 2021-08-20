@@ -1,0 +1,44 @@
+{
+    "name": "vite-plugin-svgr",
+    "version": "1.0.0",
+    "description": "Vite plugin to transform SVGs into React components using svgr under the hood.",
+    "author": "Luc Heinrich",
+    "homepage": "https://github.com/lucsky/vite-plugin-svgr#readme",
+    "repository": "https://github.com/lucsky/vite-plugin-svgr",
+    "bugs": "https://github.com/lucsky/vite-plugin-svgr/issues",
+    "license": "MIT",
+    "main": "index.js",
+    "types": "index.d.ts",
+    "files": [
+        "dist/index.js",
+        "index.d.ts"
+    ],
+    "keywords": [
+        "vite",
+        "svgr",
+        "plugin"
+    ],
+    "prettier": {
+        "tabWidth": 4,
+        "printWidth": 120,
+        "singleQuote": true,
+        "trailingComma": "none",
+        "bracketSpacing": true,
+        "jsxBracketSameLine": false,
+        "arrowParens": "always",
+        "proseWrap": "preserve"
+    },
+    "dependencies": {
+        "@svgr/core": "^5.5.0"
+    },
+    "devDependencies": {
+        "@types/node": "^16.6.2",
+        "typescript": "^4.3.5",
+        "vite": "^2.5.0"
+    },
+    "scripts": {
+        "dev": "tsc --watch",
+        "build": "tsc",
+        "prepublish": "build"
+    }
+}
