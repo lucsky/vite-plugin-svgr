@@ -1,5 +1,4 @@
 import fs from 'fs';
-import path from 'path';
 import esbuild from 'esbuild';
 
 import type { Plugin } from 'vite';
@@ -30,26 +29,16 @@ export default function svgrPlugin(): Plugin {
 
         generateBundle(config, bundle) {
             // Discard transformed SVG assets from bundle so they are not emitted
-            const patterns = transformed.map((id) => {
-                const basename = path.basename(id, '.svg?component');
-                return fileNamePatternToRegExp(config.assetFileNames, basename);
-            });
-
             for (const [key, bundleEntry] of Object.entries(bundle)) {
-                const { type, fileName } = bundleEntry;
-                if (type === 'asset' && fileName.endsWith('.svg') && patterns.some((p) => fileName.match(p))) {
+                const { type, name } = bundleEntry;
+                if (
+                    type === 'asset' &&
+                    name?.endsWith('.svg') &&
+                    transformed.findIndex((id) => id.includes(name)) >= 0
+                ) {
                     delete bundle[key];
                 }
             }
         }
     };
-}
-
-function fileNamePatternToRegExp(pattern: string, name: string) {
-    const regexp = pattern
-        .replace('[name]', name)
-        .replace('[hash]', '[a-z0-9]+')
-        .replace('[ext]', 'svg')
-        .replace(/\./g, '\\.');
-    return new RegExp(regexp);
 }
