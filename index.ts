@@ -1,6 +1,5 @@
 import fs from 'fs';
-import esbuild from 'esbuild';
-
+import { transform } from 'esbuild';
 import type { Plugin } from 'vite';
 
 // Use require to prevent missing declaration file typescript errors
@@ -24,7 +23,7 @@ export default function svgrPlugin(options: PluginOptions = {}): Plugin {
             const svgDataPath = id.replace('?component', '');
             const svgData = await fs.promises.readFile(svgDataPath, 'utf8');
             const componentCode = await svgr(svgData, {}, { filePath: svgDataPath });
-            const component = await esbuild.transform(componentCode, { loader: 'jsx' });
+            const component = await transform(componentCode, { loader: 'jsx' });
 
             transformed.push(id);
 
