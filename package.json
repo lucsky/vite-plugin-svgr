@@ -8,10 +8,11 @@
     "bugs": "https://github.com/lucsky/vite-plugin-svgr/issues",
     "license": "MIT",
     "main": "dist/index.js",
-    "types": "index.d.ts",
+    "types": "dist/index.d.ts",
     "files": [
         "dist/index.js",
-        "index.d.ts"
+        "dist/index.d.ts",
+        "client.d.ts"
     ],
     "keywords": [
         "vite",
