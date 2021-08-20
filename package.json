@@ -1,6 +1,6 @@
 {
     "name": "@honkhonk/vite-plugin-svgr",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Vite plugin to transform SVGs into React components using svgr under the hood.",
     "author": "Luc Heinrich",
     "homepage": "https://github.com/lucsky/vite-plugin-svgr#readme",
