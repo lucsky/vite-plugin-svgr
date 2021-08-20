@@ -7,7 +7,7 @@
     "repository": "https://github.com/lucsky/vite-plugin-svgr",
     "bugs": "https://github.com/lucsky/vite-plugin-svgr/issues",
     "license": "MIT",
-    "main": "index.js",
+    "main": "dist/index.js",
     "types": "index.d.ts",
     "files": [
         "dist/index.js",
