@@ -5,7 +5,7 @@ import esbuild from 'esbuild';
 import type { Plugin } from 'vite';
 
 // Use require to prevent missing declaration file typescript errors
-const svgr = require('@svgr/core');
+const svgr = require('@svgr/core').default;
 
 export default function svgrPlugin(): Plugin {
     const transformed: Array<string> = [];
