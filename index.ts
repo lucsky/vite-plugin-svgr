@@ -6,7 +6,11 @@ import type { Plugin } from 'vite';
 // Use require to prevent missing declaration file typescript errors
 const svgr = require('@svgr/core').default;
 
-export default function svgrPlugin(): Plugin {
+interface PluginOptions {
+    keepEmittedAssets?: boolean;
+}
+
+export default function svgrPlugin(options: PluginOptions = {}): Plugin {
     const transformed: Array<string> = [];
 
     return {
@@ -28,6 +32,10 @@ export default function svgrPlugin(): Plugin {
         },
 
         generateBundle(config, bundle) {
+            if (options.keepEmittedAssets) {
+                return;
+            }
+
             // Discard transformed SVG assets from bundle so they are not emitted
             for (const [key, bundleEntry] of Object.entries(bundle)) {
                 const { type, name } = bundleEntry;
