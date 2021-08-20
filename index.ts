@@ -1,15 +1,13 @@
 import fs from 'fs';
 import { transform } from 'esbuild';
+
 import type { Plugin } from 'vite';
+import type { SvgrPluginOptions } from '.';
 
 // Use require to prevent missing declaration file typescript errors
 const svgr = require('@svgr/core').default;
 
-interface PluginOptions {
-    keepEmittedAssets?: boolean;
-}
-
-export default function svgrPlugin(options: PluginOptions = {}): Plugin {
+export default function svgrPlugin(options: SvgrPluginOptions = {}): Plugin {
     const transformed: Array<string> = [];
 
     return {
