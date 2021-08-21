@@ -1,10 +1,8 @@
 # vite-plugin-svgr
 
-Vite plugin to transform SVGs into React components using svgr under the hood.
+Vite plugin to import SVG files as React components using svgr under the hood.
 
-## :warning: Requirement :warning:
-
-This plugin only works with version 2.5.0 (and greater) of ViteJS, which has a compatibility fix with Rollup that this plugin expects.
+<a href="https://npmjs.com/package/@honkhonk/vite-plugin-svgr"><img src="https://img.shields.io/npm/v/@honkhonk/vite-plugin-svgr.svg" alt="npm package"></a>
 
 ## Installation
 
@@ -22,14 +20,14 @@ $ yarn add --dev @honkhonk/vite-plugin-svgr
 
 ## Usage
 
-Add `svgrPlugin()` to the list of plugins in the ViteJS configuration file (`vite.config.js`) of your project.
+Add `svgr()` (or whatever you decide to name your default import) to the list of plugins in the ViteJS configuration file (`vite.config.js`) of your project.
 
 ```js
-import svgrPlugin from '@honkhonk/vite-plugin-svgr';
+import svgr from '@honkhonk/vite-plugin-svgr';
 
 export default defineConfig({
     //...
-    plugins: [svgrPlugin()]
+    plugins: [svgr()]
 });
 ```
 
@@ -56,12 +54,12 @@ function SomeComponent() {
 
 ## Configuration
 
-By default, the plugin will prevent transformed SVG assets to be emitted when building the production bundle. If you want or need to have those files emitted anyway, pass the `{keepEmittedAssets: true}` option:
+By default, the plugin will prevent transformed SVG assets to be emitted when building the production bundle (when using Vite 2.5.0 or later). If you want or need to have those files emitted anyway, pass the `{keepEmittedAssets: true}` option:
 
 ```js
 export default defineConfig({
     //...
-    plugins: [svgrPlugin({ keepEmittedAssets: true })]
+    plugins: [svgr({ keepEmittedAssets: true })]
 });
 ```
 
