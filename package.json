@@ -45,6 +45,7 @@
         "dev": "tsc --watch",
         "build": "tsc",
         "clean": "rm -rf dist",
+        "prebuild": "yarn run clean",
         "prepublish": "yarn run build"
     },
     "publishConfig": {
