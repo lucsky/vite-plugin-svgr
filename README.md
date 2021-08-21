@@ -54,12 +54,33 @@ function SomeComponent() {
 
 ## Configuration
 
+-   ### `keepEmittedAssets`
+
 By default, the plugin will prevent transformed SVG assets to be emitted when building the production bundle (when using Vite 2.5.0 or later). If you want or need to have those files emitted anyway, pass the `{keepEmittedAssets: true}` option:
 
 ```js
 export default defineConfig({
     //...
     plugins: [svgr({ keepEmittedAssets: true })]
+});
+```
+
+-   ### svgrOptions
+
+Allows to pass global svgr configuration flags. See svgr [configuration documentation](https://react-svgr.com/docs/options/) for more details.
+
+```js
+export default defineConfig({
+    //...
+    plugins: [
+        svgr({
+            svgrOptions: {
+                icon: true,
+                dimensions: false
+                // etc...
+            }
+        })
+    ]
 });
 ```
 
