@@ -65,7 +65,7 @@ export default defineConfig({
 });
 ```
 
--   ### svgrOptions
+-   ### `svgrOptions`
 
 Allows to pass global svgr configuration flags. See svgr [configuration documentation](https://react-svgr.com/docs/options/) for more details.
 
