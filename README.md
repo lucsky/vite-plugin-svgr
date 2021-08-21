@@ -65,7 +65,7 @@ export default defineConfig({
 
 ## Acknowledgement
 
-This plugin started as a fork of Rongjian Zhang (@pd4d10) [vite-plugin-svgr](https://github.com/pd4d10/vite-plugin-svgr) but diverged enough in the way imports are handled (named vs default with parameter) that a making it a separate package looked easier.
+This plugin started as a fork of Rongjian Zhang (@pd4d10) [vite-plugin-svgr](https://github.com/pd4d10/vite-plugin-svgr) but diverged enough in the way imports are handled (named vs default with parameter) that making it a separate package looked easier.
 
 ## License
 
