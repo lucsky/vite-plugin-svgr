@@ -52,6 +52,18 @@ function SomeComponent() {
 }
 ```
 
+## Typescript integration
+
+If you are using this plugin in a Typescript project, adding the type definitions to your `tsconfig.json` will assign correct types to the imported SVG assets:
+
+```json
+{
+    "compilerOptions": {
+        "types": [ "@honkhonk/vite-plugin-svgr/client" ]
+    }
+}
+```
+
 ## Configuration
 
 -   ### `keepEmittedAssets`
