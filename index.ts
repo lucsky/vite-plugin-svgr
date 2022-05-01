@@ -13,6 +13,9 @@ interface SvgrPluginOptions {
     // imported as a component.
     keepEmittedAssets?: boolean;
 
+    // Make the ?component suffix optional
+    componentSuffixOptional?: boolean;
+
     // Options passed directly to `@svgr/core`
     // (see https://react-svgr.com/docs/options)
     svgrOptions?: SVGROptions;
@@ -37,17 +40,26 @@ export default function svgrPlugin(options: SvgrPluginOptions = {}): Plugin {
         name: 'vite:svgr',
 
         async transform(code, id) {
-            if (id.indexOf('.svg?component') === -1) {
+            if (
+                id.indexOf('.svg') === -1 ||
+                (id.indexOf('.svg?component') && !options?.componentSuffixOptional) ||
+                (id.indexOf('.svg?url') === -1 && options?.componentSuffixOptional)
+            ) {
                 return null;
             }
 
             const globalSvgrOptions = options?.svgrOptions ?? {};
-            const queryIndex = id.indexOf('?component');
-            const query = id.substr(queryIndex + 1);
-            const specificSvgrOptions = svgrOptionsFromQuery(query);
-            const svgrOptions = { ...globalSvgrOptions, ...specificSvgrOptions };
+            let svgrOptions = { ...globalSvgrOptions };
+            let svgDataPath = id;
 
-            const svgDataPath = id.substr(0, queryIndex);
+            if (id.indexOf('?') > -1) {
+                const queryIndex = id.indexOf(options?.componentSuffixOptional ? '?' : '?component');
+                const query = id.substr(queryIndex + 1);
+                const specificSvgrOptions = svgrOptionsFromQuery(query);
+                svgrOptions = { ...globalSvgrOptions, ...specificSvgrOptions };
+                svgDataPath = id.substr(0, queryIndex);
+            }
+
             const svgData = await fs.promises.readFile(svgDataPath, 'utf8');
 
             const componentCode = await svgr(svgData, svgrOptions, { filePath: svgDataPath });

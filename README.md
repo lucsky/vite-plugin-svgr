@@ -77,6 +77,19 @@ export default defineConfig({
 });
 ```
 
+-   ### `componentSuffix`
+
+By default the plugin will only import SVG assets with a
+suffix of `*.svg?component` to keep the default behavior of
+ViteJS that will get you the URL of the asset. If you want or need to change this behavior, pass the `{componentSuffixOptional: true}` option. If you want the default behavior use `*.svg?url` and the plugin will ignore it.
+
+```js
+export default defineConfig({
+    //...
+    plugins: [svgr({ componentSuffixOptional: true })]
+});
+```
+
 -   ### `svgrOptions`
 
 Allows to pass global svgr configuration flags. See svgr [configuration documentation](https://react-svgr.com/docs/options/) for more details.
