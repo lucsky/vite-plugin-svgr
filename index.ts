@@ -1,12 +1,7 @@
 import fs from 'fs';
 import { transform } from 'esbuild';
-
 import type { Plugin } from 'vite';
-
-// Use require to prevent missing declaration file typescript errors
-// This can be turned into a regular import when @svgr/core has proper
-// typings (see https://github.com/gregberge/svgr/pull/555)
-const svgr = require('@svgr/core').default;
+import { Config, transform as svgr } from '@svgr/core'
 
 interface SvgrPluginOptions {
     // Emit SVG assets to the production bundle even if it has been
@@ -15,19 +10,7 @@ interface SvgrPluginOptions {
 
     // Options passed directly to `@svgr/core`
     // (see https://react-svgr.com/docs/options)
-    svgrOptions?: SVGROptions;
-}
-
-interface SVGROptions {
-    icon?: boolean;
-    dimensions?: boolean;
-    expandProps?: 'start' | 'end' | false;
-    svgo?: boolean;
-    ref?: boolean;
-    memo?: boolean;
-    replaceAttrValues?: Record<string, string>;
-    svgProps?: Record<string, string>;
-    titleProp?: boolean;
+    svgrOptions?: Config;
 }
 
 export default function svgrPlugin(options: SvgrPluginOptions = {}): Plugin {
@@ -43,11 +26,11 @@ export default function svgrPlugin(options: SvgrPluginOptions = {}): Plugin {
 
             const globalSvgrOptions = options?.svgrOptions ?? {};
             const queryIndex = id.indexOf('?component');
-            const query = id.substr(queryIndex + 1);
+            const query = id.substring(queryIndex + 1);
             const specificSvgrOptions = svgrOptionsFromQuery(query);
             const svgrOptions = { ...globalSvgrOptions, ...specificSvgrOptions };
 
-            const svgDataPath = id.substr(0, queryIndex);
+            const svgDataPath = id.substring(0, queryIndex);
             const svgData = await fs.promises.readFile(svgDataPath, 'utf8');
 
             const componentCode = await svgr(svgData, svgrOptions, { filePath: svgDataPath });
@@ -79,7 +62,7 @@ export default function svgrPlugin(options: SvgrPluginOptions = {}): Plugin {
 }
 
 export function svgrOptionsFromQuery(query: string) {
-    const options: SVGROptions = {};
+    const options: Config = {};
     const pairs = query.split('&');
 
     pairs.forEach((pair) => {
